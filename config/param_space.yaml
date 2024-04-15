@@ -1,0 +1,51 @@
+v_scan:
+  start: 0.2
+  stop: 0.8
+  step: 0.2
+
+hatch: [20]
+
+starting_pos: ["LL", "LR", "UL", "UR"]
+
+heading: ["x", "y"]
+
+spot_width:
+  base: hatch
+  start_offset: -10
+  stop_offset: 6
+  step: 2
+
+melt_tail_length:
+  start: 60
+  stop: 71
+  step: 5
+
+melt_depth:
+  start: 30
+  stop: 36
+  step: 5
+
+cap_height:
+  start: 7
+  stop: 12
+  step: 2
+
+HAZ_width:
+  base: hatch
+  start_offset: 20
+  stop_offset: 31
+  step: 2
+
+HAZ_tail:
+  base: melt_tail_length
+  offset: 15
+
+depth_HAZ:
+  base: melt_depth
+  offset: 5
+
+cap_HAZ:
+  base: cap_height
+  offset: 5
+
+exp_factor: [0.1]

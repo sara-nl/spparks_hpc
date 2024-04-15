@@ -5,6 +5,8 @@ Configuration Generation Script:
 
 - Contains all functions related to reading parameters from a YAML file.
 - Generates configurations and writes them to a config_file.
+- the config_file contains all different init conditions to start a Potts kMC simulation on SPPARKS 
+    - format per line is 'vHpdV_80_0_20_UR_y_24_70_35_11_48_80_40_16_0_1'
 - This script can be run whenever there's a need to update or generate new configurations.
 
 """
@@ -204,7 +206,6 @@ def create_HAZ_permutations(params: Potts_Param) -> List[List[int]]:
 
 
 def main(args):
-    working_dir = args.working_dir
     yaml_file = args.yaml_file
     output_dir = args.output_dir
 
@@ -224,23 +225,16 @@ def main(args):
 
 if __name__ == "__main__":
     parser = ArgumentParser()
-    home_dir = os.environ["HOME"]
-    parser.add_argument(
-        "--working_dir",
-        type=str,
-        default=f"{home_dir}/esa/IN100_SLM_AI_Training_Set_II/spparks",
-        help="define working dir",
-    )
     parser.add_argument(
         "--yaml_file",
         type=str,
-        default=f"{home_dir}/esa/ml-materials-engineering/spparks/small_params.yaml",
-        help="yaml file",
+        default=f"./small_params.yaml",
+        help="yaml file describing the param space",
     )
     parser.add_argument(
         "--output_dir",
         type=str,
-        default=f"{home_dir}/esa/IN100_SLM_AI_Training_Set_II/spparks",
+        default=f"./spparks",
         help="define dir where to output config_file",
     )
 
