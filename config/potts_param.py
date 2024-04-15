@@ -69,35 +69,6 @@ class Potts_Param:
         return getattr(self, key)
 
 
-
-    def load_parameters(self):
-        # Direct parameters
-        self.hatch = self.params["hatch"]
-        self.starting_pos = self.params["starting_pos"]
-        self.heading = self.params["heading"]
-
-        self.v_scan = self._compute_range(self.params["v_scan"])
-        self.melt_tail_length = self._compute_range(self.params["melt_tail_length"])
-        self.melt_depth = self._compute_range(self.params["melt_depth"])
-        self.cap_height = self._compute_range(self.params["cap_height"])
-
-        self.exp_factor = self.params["exp_factor"]
-
-        # Derived parameters
-        self.spot_width = self._compute_range_with_base("spot_width")
-        self.HAZ_width = self._compute_range_with_base("HAZ_width")
-
-        self.HAZ_tail = self._compute_with_offset(
-            "melt_tail_length", self.params["HAZ_tail"]["offset"]
-        )
-        self.depth_HAZ = self._compute_with_offset(
-            "melt_depth", self.params["depth_HAZ"]["offset"]
-        )
-        self.cap_HAZ = self._compute_with_offset(
-            "cap_height", self.params["cap_HAZ"]["offset"]
-        )
-
-
 if __name__ == "__main__":
     # Path to the YAML configuration file
     dirname = os.path.dirname(__file__)
