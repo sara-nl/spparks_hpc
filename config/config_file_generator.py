@@ -228,7 +228,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--yaml_file",
         type=str,
-        default=f"./small_params.yaml",
+        default=f"./param_space.yaml",
         help="yaml file describing the param space",
     )
     parser.add_argument(
