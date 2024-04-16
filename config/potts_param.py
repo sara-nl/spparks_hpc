@@ -102,6 +102,12 @@ class Potts_Param:
                 f"Required attribute '{key}' not found in class attributes."
             )
 
+    def print_attributes(self):
+        """Prints all attributes of the instance in a nicely formatted manner."""
+        print("Potts_Param Attributes:")
+        for attr, value in sorted(vars(self).items()):
+            print(f"{attr}: {value}")
+
 
 if __name__ == "__main__":
     # Path to the YAML configuration file
