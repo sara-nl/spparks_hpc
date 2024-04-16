@@ -27,7 +27,7 @@ range:
 
   spot_width:
     base: hatch
-    start: -10 #TODO start stop and step so i can reuse range function
+    start: -10
     stop: 6
     step: 2
 
