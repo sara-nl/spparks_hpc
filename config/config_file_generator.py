@@ -3,7 +3,7 @@ Last update on Apr 11, 2024
 
 Configuration Generation Script:
 
-- Contains all functions related to reading parameters from a YAML file.
+- Load parameters from a YAML file.
 - Generates configurations and writes them to a config_file.
 - the config_file contains all different init conditions to start a Potts kMC simulation on SPPARKS 
     - format per line is 'vHpdV_80_0_20_UR_y_24_70_35_11_48_80_40_16_0_1'
@@ -35,9 +35,11 @@ def _create_config_name(config_map):
     for config in config_map:
         # Convert tuple elements to strings, handle lists inside the tuple separately
         elements = [
-            str(item).replace(".", "_")
-            if not isinstance(item, list)
-            else "_".join(map(lambda x: str(x).replace(".", "_"), item))
+            (
+                str(item).replace(".", "_")
+                if not isinstance(item, list)
+                else "_".join(map(lambda x: str(x).replace(".", "_"), item))
+            )
             for item in config
         ]
 
@@ -177,6 +179,34 @@ def amend_config_file(config_names: List[str], output_dir: str) -> Optional[str]
 
 
 def create_HAZ_permutations(params: Potts_Param) -> List[List[int]]:
+    """
+    Generates a list of valid HAZ (Heat Affected Zone) parameter permutations from a given Potts_Param instance.
+
+    The function extracts relevant HAZ parameters from the Potts_Param object and creates all possible combinations (permutations) of these parameters. A valid combination must satisfy certain conditions where each HAZ dimension parameter (width, tail length, depth, cap height) must be greater than its corresponding base parameter.
+
+    Args:
+    - params (Potts_Param): An instance of the Potts_Param class containing simulation parameters.
+
+    Returns:
+    - List[List[int]]: A list of all valid parameter combinations. Each combination is a list of integers representing values for spot width, melt tail length, melt depth, cap height, HAZ width, HAZ tail, depth HAZ, cap HAZ, and expansion factor.
+
+    The order of parameters in each combination list is as follows:
+    - spot_width
+    - melt_tail_length
+    - melt_depth
+    - cap_height
+    - HAZ_width
+    - HAZ_tail
+    - depth_HAZ
+    - cap_HAZ
+    - exp_factor
+
+    Example:
+    Each list in the output represents a set of parameters that could be used to simulate a specific scenario in a Potts model kinetic Monte Carlo simulation.
+
+    Note:
+    The validity of each combination is determined by a set of constraints ensuring that the HAZ parameters are consistently larger than their corresponding base parameters. This reflects the physical expectation that the heat affected zone dimensions should exceed the actual dimensions at which materials are directly affected by the laser in additive manufacturing processes.
+    """
     # spot_width melt_tail_length melt_depth cap_height HAZ_width HAZ_tail depth_HAZ cap_HAZ exp_factor
     HAZ_list = [
         params.spot_width,
@@ -198,16 +228,16 @@ def create_HAZ_permutations(params: Potts_Param) -> List[List[int]]:
             and combination[3] < combination[7]  # cap_height < cap_HAZ
         )
 
-    # HAZ zone/ Laser power profile in units of [sites]
-    # HAZ_map = list(itertools.product(*HAZ_list))
+    # Generate all permutations of HAZ parameters and filter by validity
     HAZ_map = filter(_valid_combination, itertools.product(*HAZ_list))
     HAZ_map_list = [list(item) for item in HAZ_map]
     return HAZ_map_list
 
 
 def main(args):
-    yaml_file = args.yaml_file
-    output_dir = args.output_dir
+    dirname = os.path.dirname(__file__)
+    yaml_file = os.path.join(dirname, args.yaml_file) 
+    output_dir = os.path.dirname(dirname)
 
     os.makedirs(output_dir, exist_ok=True)
 
@@ -228,7 +258,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--yaml_file",
         type=str,
-        default=f"./param_space.yaml",
+        default=f"param_space.yaml",
         help="yaml file describing the param space",
     )
     parser.add_argument(
