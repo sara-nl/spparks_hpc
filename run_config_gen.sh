@@ -18,7 +18,7 @@ module load Python/3.10.4-GCCcore-11.3.0
 # copy relevant files 
 cp ./config/param_space.yaml "$TMPDIR"
 
-python config_file_generator.py --yaml_file "$TMPDIR"/param_space.yaml --output_dir "$TMPDIR"
+python config_file_gen.py --yaml_file "$TMPDIR"/param_space.yaml --output_dir "$TMPDIR"
 
 cp "$TMPDIR"/param_space.yaml $OUTPUT
 cp -r "$TMPDIR"/config_file_* $OUTPUT
