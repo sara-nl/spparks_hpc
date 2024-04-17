@@ -20,7 +20,7 @@ cd ./config
 # copy relevant files 
 cp param_space.yaml "$TMPDIR"
 
-python config_file_gen.py --yaml_file "$TMPDIR"/param_space.yaml --output_dir "$TMPDIR"
+python config_file_generator.py --yaml_file "$TMPDIR"/param_space.yaml --output_dir "$TMPDIR"
 
 cp "$TMPDIR"/param_space.yaml $OUTPUT
 cp -r "$TMPDIR"/config_file_* $OUTPUT
