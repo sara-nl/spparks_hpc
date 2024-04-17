@@ -5,10 +5,11 @@ This repository contains scripts and configurations for running and generating d
 
 ### Table of Contents
 1. [About SPPARKS](#about-spparks)
-2. [Prerequisites and Environment Setup](#prerequisities-and-environment-setup)
-3. [Preparing your Configuration Parameters](#preparing-your-configuration-parameters)
-4. [Running SPPARKS](#running-spparks)
+2. [Prerequisites and Environment Setup](#prerequisites-and-environment-setup)
+3. [Generate your Configuration File](#generate-your-configuration-file)
+4. [Execute SPPARKS Simulations](#execute-spparks-simulations)
 5. [Slurm Job Submission Example](#slurm-job-submission-example)
+6. [Final Notes](#final-notes)
 
 ## About SPPARKS 
 SPPARKS is a parallel Monte Carlo code for on-lattice and off-lattice models that includes algorithms for kinetic Monte Carlo (KMC), rejection kinetic Monte Carlo (rKMC), and Metropolis Monte Carlo (MMC). 
@@ -18,13 +19,9 @@ It is developed by Sandia Labs, and it is used for modelling additive manufactur
 Page and official documentation: https://spparks.github.io/
 
 ## Prerequisites and Environment Setup
-### Python Virtual Environment and Dependencies
-1. **Create a Directory for SPPARKS**:
-   ```
-   mkdir spparks
-   ```
-2. **Load SPPARKS as a module**:
+1. **Install SPPARKS locally**:  
    SPPARKS (and its dependency Stitch) is currently in the process of being integrated into the EasyBuild community GitHub repository (https://github.com/easybuilders). This integration aims to facilitate easier access and management of SPPARKS installations within the scientific and engineering communities.
+   
    To load SPPARKS from the proposed changes, run the following commands:
    ```
    eblocalinstall --from-pr 18049 --include-easyblocks-from-pr 2948 -r --rebuild
@@ -34,7 +31,7 @@ Page and official documentation: https://spparks.github.io/
    ```
    module load spparks/16Jan23-foss-2022a
    ``` 
-4. **Load Python module**:
+2. **Load Required Modules**:
    Load the Python module and create a virtual environment to manage your Python packages.
    ```
    module load 2022
@@ -55,15 +52,27 @@ Page and official documentation: https://spparks.github.io/
    cd SPPARKS_Snellius
    ```
 
-## Preparing your Configuration Parameters
+## Generate your Configuration File
+This step involves creating potential configurations from a predefined parameter space which is specified in a YAML file.
+You can run the script by submitting a job to the cluster using `sbatch`:
+```
+sbatch run_config_gen.sh
+```
 
-The dataset creation pipeline consists of two main steps:
-1. Generating possible configurations from a defined parameter space.
-2. Executing these configurations on SPPARKS to create the dataset.
-
-## Running SPPARKS
+## Execute SPPARKS Simulations
+Having set the parameter space in proper configurations, these configurations are now executed on SPPARKS to create the dataset.
+TODO
 
 ## Slurm Job Submission Example
+TODO
+
+## Final Notes
+- If you encounter any issues or need further assistance, consider reaching out to Snellius support or consult the documentation for the specific modules and tools you're using.
+- Additionally, feel free to reach out to the high performance machine learning team (primary contact: monica.rotulo@surf.nl) for further assistance.
+- For more detailed information about SPPARKS parameters and options, refer to the [Official SPPARKS Documentation](https://spparks.github.io/doc/app_am_ellipsoid.html).
+
+
+
 
 
 
