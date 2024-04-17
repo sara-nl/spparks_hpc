@@ -235,10 +235,8 @@ def create_HAZ_permutations(params: Potts_Param) -> List[List[int]]:
 
 
 def main(args):
-    dirname = os.path.dirname(__file__)
-    yaml_file = os.path.join(dirname, args.yaml_file) 
-    output_dir = os.path.dirname(dirname)
-
+    yaml_file = args.yaml_file
+    output_dir = args.output_dir
     os.makedirs(output_dir, exist_ok=True)
 
     params = Potts_Param(yaml_file)
@@ -258,13 +256,13 @@ if __name__ == "__main__":
     parser.add_argument(
         "--yaml_file",
         type=str,
-        default=f"param_space.yaml",
+        default=f"./config/param_space.yaml",
         help="yaml file describing the param space",
     )
     parser.add_argument(
         "--output_dir",
         type=str,
-        default=f"./spparks",
+        default=f"./config",
         help="define dir where to output config_file",
     )
 
