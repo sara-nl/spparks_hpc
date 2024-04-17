@@ -15,8 +15,10 @@ source ../venv/bin/activate
 module load 2022 
 module load Python/3.10.4-GCCcore-11.3.0
 
+cd ./config
+
 # copy relevant files 
-cp ./config/param_space.yaml "$TMPDIR"
+cp param_space.yaml "$TMPDIR"
 
 python config_file_gen.py --yaml_file "$TMPDIR"/param_space.yaml --output_dir "$TMPDIR"
 
