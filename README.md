@@ -19,34 +19,37 @@ It is developed by Sandia Labs, and it is used for modelling additive manufactur
 Page and official documentation: https://spparks.github.io/
 
 ## Prerequisites and Environment Setup
+
 1. **Install SPPARKS locally**:  
+
    SPPARKS (and its dependency Stitch) is currently in the process of being integrated into the EasyBuild community GitHub repository (https://github.com/easybuilders). This integration aims to facilitate easier access and management of SPPARKS installations within the scientific and engineering communities.
    
    To load SPPARKS from the proposed changes, run the following commands:
    ```
+   module load 2022 eb/4.9.1
    eblocalinstall --from-pr 18049 --include-easyblocks-from-pr 2948 -r --rebuild
    eblocalinstall --from-pr 18050 --include-easyblocks-from-pr 2948 -r --rebuild
    ```
    Now you can load it as a module:
    ```
+   module purge
+   module load 2022 
    module load spparks/16Jan23-foss-2022a
    ``` 
-2. **Load Required Modules**:
+2. **Activate the Virtual Environment and Install Dependencies**:
    Load the Python module and create a virtual environment to manage your Python packages.
    ```
-   module load 2022
    module load Python/3.10.4-GCCcore-11.3.0
    python -m venv venv
    ```
-5. **Activate the Virtual Environment and Install Dependencies**:
-   After activating the virtual environment, install the required libraries.
+   After activating the virtual environment, install the required libraries:
    ```
-   module purge
    source venv/bin/activate
    pip install numpy
    pip install PyYAML
    ```
-   Get the scripts from this repo.
+3. **Clone the Repo**
+   Finally, Get the scripts from this repo.
    ```
    git clone https://github.com/sara-nl/SPPARKS_Snellius.git
    cd SPPARKS_Snellius
