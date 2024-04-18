@@ -7,9 +7,8 @@ This repository contains scripts and configurations for running and generating d
 1. [About SPPARKS](#about-spparks)
 2. [Prerequisites and Environment Setup](#prerequisites-and-environment-setup)
 3. [Generate your Configuration File](#generate-your-configuration-file)
-4. [Execute SPPARKS Simulations](#execute-spparks-simulations)
-5. [Slurm Job Submission Example](#slurm-job-submission-example)
-6. [Final Notes](#final-notes)
+4. [Execute SPPARKS](#execute-spparks)
+5. [Final Notes](#final-notes)
 
 ## About SPPARKS 
 SPPARKS is a parallel Monte Carlo code for on-lattice and off-lattice models that includes algorithms for kinetic Monte Carlo (KMC), rejection kinetic Monte Carlo (rKMC), and Metropolis Monte Carlo (MMC). 
@@ -61,18 +60,32 @@ You can run the script by submitting a job to the cluster using `sbatch`:
 ```
 sbatch run_config_gen.sh
 ```
+This script will:
+- Read the parameters from a YAML file.
+- Create possible permutations.
+- Write the parameters configurations to single/multiple config files. 
 
-## Execute SPPARKS Simulations
+## Execute SPPARKS
 Having set the parameter space in proper configurations, these configurations are now executed on SPPARKS to create the dataset.
-TODO
 
-## Slurm Job Submission Example
-TODO
+You can run SPPARKS by submitting a job:
+```
+sbatch run_spparks.sh
+```
+
+The script will:
+- Copy relevant files to scratch memory.
+- Go over the config file to fetch the correct parameters configuration.
+- Amend the spparks input script with the correct parameters values.
+- Run SPPARKS with MPI.
+
+Important: remember to copy inside the working folder your own SPPARKS input scripts. Input scripts are named in.* and to see how are structured and what commands they contain see [SPPARKS Commands](https://spparks.github.io/doc/Section_commands.html).
 
 ## Final Notes
 - If you encounter any issues or need further assistance, consider reaching out to Snellius support or consult the documentation for the specific modules and tools you're using.
 - Additionally, feel free to reach out to the high performance machine learning team (primary contact: monica.rotulo@surf.nl) for further assistance.
 - For more detailed information about SPPARKS parameters and options, refer to the [Official SPPARKS Documentation](https://spparks.github.io/doc/app_am_ellipsoid.html).
+- For information about SPPARKS input scripts, refer to [SPPARKS Commands](https://spparks.github.io/doc/Section_commands.html).
 
 
 
