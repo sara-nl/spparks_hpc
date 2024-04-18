@@ -40,15 +40,33 @@ def create_folder(working_dir, config_name):
         print("Error: Creating directory. " + directory)
         raise e
     return directory
-    
-
-def copy_initial_condition(working_dir, directory):
-    src = working_dir + "/" + "IN100_3d.init"
-    dst = directory + "/" + "IN100_3d.init"
-    shutil.copyfile(src, dst)
 
 
-def _create_config_map(config_str: str) -> tuple:
+def copy_initial_condition(working_dir, directory, init_file="IN100_3d.init"):
+
+    # Construct full paths to the source and destination files
+    src = os.path.join(working_dir, init_file)
+    dst = os.path.join(directory, init_file)
+
+    try:
+        # Ensure the destination directory exists; create if it does not
+        os.makedirs(directory, exist_ok=True)
+
+        # Copy the file from source to destination
+        shutil.copyfile(src, dst)
+    except FileNotFoundError:
+        print(
+            f"Error: The source file {src} does not exist or the destination cannot be found."
+        )
+    except PermissionError:
+        print(f"Error: Permission denied when accessing {src} or {directory}.")
+    except OSError as os_error:
+        print(f"Error: {os_error}")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+
+
+def create_config_map(config_str: str) -> tuple:
     # Remove the 'vHpdV_' prefix
     values = config_str.split("_")[1:]
 
@@ -65,19 +83,24 @@ def _create_config_map(config_str: str) -> tuple:
     return (v1, v2, v3, v4, HAZ_list)
 
 
-def amend_spparks_file(case_name, working_dir):
+def amend_spparks_file(case_name, working_dir, input_file="in.potts_am_IN100_3d"):
     """
     Create config map from case name string
     """
-    config_map = _create_config_map(case_name)
+    config_map = create_config_map(case_name)
+
+    src_file = os.path.join(working_dir, input_file)
+    case_dir = os.path.join(working_dir, case_name)
+    dst_file = os.path.join(case_dir, input_file)
+
+    if not os.path.isfile(src_file):
+        raise FileNotFoundError(f"The source file {src_file} does not exist.")
 
     # open files from template & copy new file in the case directory
     with open(
-        working_dir + "/" + "in.potts_am_IN100_3d",
+        src_file,
         "r",
-    ) as template, open(
-        working_dir + "/" + case_name + "/" + "in.potts_am_IN100_3d", "a"
-    ) as new_spparks_file:
+    ) as template, open(dst_file, "a") as new_spparks_file:
         # calculate single hatch line coordinates
         V_x = config_map[0]
         V_y = config_map[0]
@@ -167,7 +190,6 @@ def main(args):
         case_directory = create_folder(working_dir, case_name)
         copy_initial_condition(working_dir, case_directory)
         amend_spparks_file(case_name, working_dir)
-
 
 
 if __name__ == "__main__":

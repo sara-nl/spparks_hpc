@@ -85,7 +85,6 @@ class Potts_Param:
             values = [x + offset for x in base_value]
             setattr(self, key, values)
 
-
     def _get_attribute_value(self, key):
         """
         Retrieve the value for a given parameter.
