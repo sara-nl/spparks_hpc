@@ -1,5 +1,5 @@
 """
-Last modified on 30 Oct 2023
+Last modified on 18 Apr 2024
 
 Script that for a given new case_name (ex: 'vHpdV_20_0_20_LL_x_10_60_30_7_40_75_35_12_0_1'):
     - check if the corresponding folder already exists
@@ -18,7 +18,7 @@ from typing import List, Tuple
 import numpy as np
 
 
-def check_folder_exists(config_name: str, working_dir: str) -> bool:
+def folder_exists(working_dir: str, config_name: str) -> bool:
     folder_exists: bool = False
 
     for root, dirs, files in os.walk(working_dir):
@@ -31,24 +31,21 @@ def check_folder_exists(config_name: str, working_dir: str) -> bool:
     return folder_exists
 
 
-def create_folder(config_name, working_dir):
+def create_folder(working_dir, config_name):
     directory = os.path.join(working_dir, config_name)
     try:
         if not os.path.exists(directory):
             os.makedirs(directory)
-    except OSError:
+    except OSError as e:
         print("Error: Creating directory. " + directory)
-    _create_initial_condition(working_dir, directory)
+        raise e
+    return directory
+    
 
-
-def _create_initial_condition(working_dir, directory):
-    # src = working_dir + "/init/" + "IN100_3d.init"
+def copy_initial_condition(working_dir, directory):
     src = working_dir + "/" + "IN100_3d.init"
     dst = directory + "/" + "IN100_3d.init"
     shutil.copyfile(src, dst)
-    # src= working_dir+'/template/'+'in.potts_am_IN100_3d'
-    # dst = directory+'/in.potts_am_IN100_3d'
-    # shutil.copyfile(src, dst)
 
 
 def _create_config_map(config_str: str) -> tuple:
@@ -76,8 +73,6 @@ def amend_spparks_file(case_name, working_dir):
 
     # open files from template & copy new file in the case directory
     with open(
-        # working_dir + "/template/" + "in.potts_am_IN100_3d",
-        # "r"
         working_dir + "/" + "in.potts_am_IN100_3d",
         "r",
     ) as template, open(
@@ -168,10 +163,11 @@ def main(args):
     working_dir = args.working_dir
     case_name = args.case_name
 
-    config_exists = check_folder_exists(case_name, working_dir)
-    if not config_exists:
-        create_folder(case_name, working_dir)
+    if not folder_exists(working_dir, case_name):
+        case_directory = create_folder(working_dir, case_name)
+        copy_initial_condition(working_dir, case_directory)
         amend_spparks_file(case_name, working_dir)
+
 
 
 if __name__ == "__main__":
@@ -180,7 +176,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--working_dir",
         type=str,
-        default=f"{home_dir}/esa/IN100_SLM_AI_Training_Set_II/spparks",
+        default=f"{home_dir}/spparks",
         help="define working dir",
     )
     parser.add_argument(
