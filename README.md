@@ -36,6 +36,7 @@ Page and official documentation: https://spparks.github.io/
    module load spparks/16Jan23-foss-2022a
    ``` 
 2. **Activate the Virtual Environment and Install Dependencies**:
+   
    Load the Python module and create a virtual environment to manage your Python packages.
    ```
    module load Python/3.10.4-GCCcore-11.3.0
@@ -48,6 +49,7 @@ Page and official documentation: https://spparks.github.io/
    pip install PyYAML
    ```
 3. **Clone the Repo**
+   
    Finally, Get the scripts from this repo.
    ```
    git clone https://github.com/sara-nl/SPPARKS_Snellius.git
