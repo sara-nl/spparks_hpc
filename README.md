@@ -81,7 +81,7 @@ The script will:
 - Amend the spparks input script with the correct parameters values.
 - Run SPPARKS with MPI.
 
-Important: remember to copy inside the working folder your own SPPARKS input scripts. Input scripts are named in.* and to see how are structured and what commands they contain see [SPPARKS Commands](https://spparks.github.io/doc/Section_commands.html).
+Important: remember to copy inside the working folder your own SPPARKS input scripts. Input scripts are named `in.*` and to see how are structured and what commands they contain see [SPPARKS Commands](https://spparks.github.io/doc/Section_commands.html).
 
 ## Final Notes
 - If you encounter any issues or need further assistance, consider reaching out to Snellius support or consult the documentation for the specific modules and tools you're using.
