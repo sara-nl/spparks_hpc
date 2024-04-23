@@ -1,7 +1,7 @@
 # SPPARKS on HPC
 
 ## Introduction
-This repository contains scripts and configurations for running and generating data using the SPPARKS software on a High-Performance Computing (HPC) environment. The script has been tested on the [Snellius supercomputer](https://www.surf.nl/en/services/snellius-the-national-supercomputer).
+This repository contains scripts and configurations for running and generating data using the SPPARKS software on a High-Performance Computing (HPC) environment. The scripts have been tested on the [Snellius supercomputer](https://www.surf.nl/en/services/snellius-the-national-supercomputer).
 
 ### Table of Contents
 1. [About SPPARKS](#about-spparks)
