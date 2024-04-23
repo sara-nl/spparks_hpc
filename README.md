@@ -84,10 +84,12 @@ The script will:
 Important: remember to copy inside the working folder your own SPPARKS input scripts. Input scripts are named `in.*` and to see how are structured and what commands they contain see [SPPARKS Commands](https://spparks.github.io/doc/Section_commands.html).
 
 ## Final Notes
-- If you encounter any issues or need further assistance, consider reaching out to Snellius support or consult the documentation for the specific modules and tools you're using.
-- Additionally, feel free to reach out to the high performance machine learning team (primary contact: monica.rotulo@surf.nl) for further assistance.
+- If you encounter any issues or need further assistance on getting access to Snellius, consider reaching out to Snellius support or consult the documentation for the specific modules and tools you're using.
 - For more detailed information about SPPARKS parameters and options, refer to the [Official SPPARKS Documentation](https://spparks.github.io/doc/app_am_ellipsoid.html).
 - For information about SPPARKS input scripts, refer to [SPPARKS Commands](https://spparks.github.io/doc/Section_commands.html).
+
+This project is a joint effort between SURF and [ESA (TEC Directorate)](https://technology.esa.int/) as part of the digitalization program on advanced manufacturing for space applications.
+If you have any question about the code or methods used in this repository you can reach out to monica.rotulo@surf.nl and michael.mallon@esa.int.
 
 
 
