@@ -8,7 +8,6 @@ Configuration Generation Script:
 - Generates configurations and writes them to a config_file.
 - the config_file contains all different init conditions to start a Potts kMC simulation on SPPARKS 
     - format per line is 'vHpdV_80_0_20_UR_y_24_70_35_11_48_80_40_16_0_1'
-- This script can be run whenever there's a need to update or generate new configurations.
 
 """
 

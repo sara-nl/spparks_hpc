@@ -53,7 +53,6 @@ def copy_initial_condition(working_dir, directory, init_file="IN100_3d.init"):
         # Ensure the destination directory exists; create if it does not
         os.makedirs(directory, exist_ok=True)
 
-        # Copy the file from source to destination
         shutil.copyfile(src, dst)
     except FileNotFoundError:
         print(

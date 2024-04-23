@@ -1,7 +1,7 @@
 import os
 import numpy as np
 import yaml
-from typing import List, Dict, Any
+from typing import Dict, Any
 
 """
     Load configuration parameters for a Potts kMC simulation.
