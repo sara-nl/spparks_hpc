@@ -1,5 +1,6 @@
 """
 Last modified on 18 Apr 2024
+@authors: Micheal Mallon (michael.mallon@esa.int), Monica Rotulo (monica.rotulo@surf.nl)
 
 Script that for a given new case_name (ex: 'vHpdV_20_0_20_LL_x_10_60_30_7_40_75_35_12_0_1'):
     - check if the corresponding folder already exists

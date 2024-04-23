@@ -1,5 +1,6 @@
 """
 Last update on Apr 11, 2024
+@authors: Micheal Mallon (michael.mallon@esa.int), Monica Rotulo (monica.rotulo@surf.nl)
 
 Configuration Generation Script:
 
