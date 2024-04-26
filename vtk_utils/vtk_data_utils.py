@@ -57,7 +57,9 @@ def extract_top_2D_slice_with_voi(
 
 
 def convert_vtk_instance_to_numpy(
-    vtk_data_object: vtk.vtkImageData, array_name: str = CELL_DATA, slicing: bool = False
+    vtk_data_object: vtk.vtkImageData,
+    array_name: str = CELL_DATA,
+    slicing: bool = False,
 ) -> np.ndarray:
     """
     Convert a vtkImageData instance (vti.n) to a NumPy array, handling both 2D and 3D data.
@@ -101,7 +103,7 @@ def convert_vtk_instance_to_numpy(
         dims = (dims[0] - 1, dims[1] - 1, dims[2] - 1)
 
     # Handle 2D data (slices)
-    if slicing: 
+    if slicing:
         dims = tuple(d for d in dims if d > 1)
 
     np_array = np_array.reshape(dims)
@@ -126,6 +128,7 @@ def read_vtk_sample(path: str) -> List[np.ndarray]:
         n += 1
 
     return temporal_sample
+
 
 def read_vtk_from_path(data_path: str, config_file: str) -> List[List[np.ndarray]]:
     """

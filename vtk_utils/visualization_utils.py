@@ -38,8 +38,10 @@ def check_array_dimensions(numpy_array: np.ndarray, extent_size: tuple):
     """
     expected_shape = tuple(e - 1 for e in extent_size)
     if numpy_array.shape != expected_shape:
-        raise ValueError(f"Array dimensions {numpy_array.shape} do not match the expected dimensions {expected_shape}.")
-    
+        raise ValueError(
+            f"Array dimensions {numpy_array.shape} do not match the expected dimensions {expected_shape}."
+        )
+
     return True
 
 
@@ -70,7 +72,7 @@ def render_vtk(vtk_data_object: vtk.vtkImageData, filename: str = "visualization
 
 
 def render_2D_from_numpy(numpy_array: np.ndarray, filename: str = "visual_np.png"):
-    '''
+    """
     Render a 2D image from a 2D slice of a NumPy array and save it as an image file.
 
     This function takes a 2D slice from a 3D NumPy array and renders it as a 2D image using PyVista.
@@ -81,14 +83,18 @@ def render_2D_from_numpy(numpy_array: np.ndarray, filename: str = "visual_np.png
     - numpy_array (np.ndarray): A 2D NumPy array or a 2D slice of a 3D array. The shape of the array
       should be in the form (height, width) or a 2D slice like (height, width, 1).
     - filename (str, optional): The name of the file where the image will be saved.
-    '''
+    """
     check_array_dimensions(numpy_array, extent_size=EXTENT_SIZE_2D)
 
     grid = pv.ImageData()  # pv.UniformGrid()
-    grid.dimensions = numpy_array.shape[0] + 1, numpy_array.shape[1] + 1, 1 # Note the ordering of dimensions
+    grid.dimensions = (
+        numpy_array.shape[0] + 1,
+        numpy_array.shape[1] + 1,
+        1,
+    )  # Note the ordering of dimensions
     grid.spacing = SPACING
     grid.origin = ORIGIN
-    grid.cell_data[CELL_DATA ] = numpy_array.flatten(order="C")
+    grid.cell_data[CELL_DATA] = numpy_array.flatten(order="C")
 
     pv.start_xvfb()
     plotter = pv.Plotter(off_screen=True)
@@ -100,13 +106,13 @@ def render_2D_from_numpy(numpy_array: np.ndarray, filename: str = "visual_np.png
 
 
 def render_3D_from_numpy(numpy_array: np.ndarray, filename: str = "visual_np.png"):
-    '''
+    """
     Render a 3D volume from a NumPy array and save it as an image.
 
     Parameters:
     - numpy_array (np.ndarray): A 3D NumPy array that should match the specified 'EXTENT'.
     - filename (str, optional): The name of the file where the image will be saved.
-    '''
+    """
     check_array_dimensions(numpy_array, extent_size=EXTENT_SIZE_3D)
 
     image = pv.ImageData(EXTENT_SIZE_3D)
