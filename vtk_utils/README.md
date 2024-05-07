@@ -68,6 +68,34 @@ To run `pyvista` on Snellius, make sure to load the following module:
 
 Otherwise, be sure to install `libgl1-mesa-glx xvfb` in your package manager. See docs of [PyVista](https://docs.pyvista.org/version/stable/api/utilities/_autosummary/pyvista.start_xvfb.html)
 
+## Slurm Job Submission Example
+
+Below is an example of a Slurm job script for running the scripts on Snellius. Adjust the resource allocations based on the complexity of your tasks and available resources.
+
+```
+#!/bin/bash
+#SBATCH --job-name=create_dataset
+#SBATCH --nodes=1
+#SBATCH --time=1-00:00:00
+#SBATCH --partition=gpu     # 'himem_8tb' for the high memory node
+#SBATCH --exclusive
+
+# Activate environment and load necessary modules
+source venv/bin/activate
+module load 2022 
+module load VTK/9.2.0.rc2-foss-2022a h5py/3.7.0-foss-2022a Xvfb/21.1.3-GCCcore-11.3.0 matplotlib/3.5.2-foss-2022a
+
+SPPARKS="${HOME}/spparks"
+EXPERIMENTS="${SPPARKS}/2023-10-20_11-43-44_4220682"
+PERSONALSPACE="${HOME}/spparks"     # insert your personal space
+
+EXPERIMENT_NUM=1
+TAR="${PERSONALSPACE}/exp_${EXPERIMENT_NUM}.tar.gz"
+
+python main_dataformat.py --tar_path ${TAR} --output_path ${PERSONALSPACE} --output_name "exp_${EXPERIMENT_NUM}"
+
+```
+
 -----
 
 
