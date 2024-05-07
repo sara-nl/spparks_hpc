@@ -107,5 +107,5 @@ python main_dataformat.py --tar_path ${TAR} --output_path ${PERSONALSPACE} --out
 - The scripts are tested on Snellius; Make sure to have enough memory to process the VTK data.
 - The scripts can be easily modified to support and process 3D Lattice data.
 - Further documentation on how to process VTK format with Python: [Kitware Docs](https://www.kitware.com/easy-data-conversion-to-vtk-with-python/)
-_ For any questions, you can reach out to monica.rotulo@surf.nl.
+- For any questions, you can reach out to monica.rotulo@surf.nl.
 
