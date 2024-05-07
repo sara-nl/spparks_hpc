@@ -2,9 +2,16 @@
 
 Set of functions to extract and convert VTK data stored within the compressed TAR file into HDF5 format.
 
-Set of functions to handle the `*.vti.i` data generated from SPPARKS. It provides functionality to process VTK data files, convert them into numpy arrays, and save them as HDF5 datasets.
+This folder is implemented to handle the `*.vti.i` data generated from SPPARKS. It provides functionality to process VTK data files, convert them into numpy arrays, and save them as HDF5 datasets.
 
-The script assumes that the VTK files are stored within a compressed TAR file (`.tar.gz`). 
+We assume that the VTK files are stored within a compressed TAR file `.tar.gz`.
+
+### Table of Contents
+1. [About the VTK toolkit](#about-the-vtk-toolkit)
+2. [Data Description](#data-description)
+3. [Usage of the Python scripts](#usage-of-the-python-scripts)
+4. [Slurm Job Submission Example](#slurm-job-submission-example)
+5. [Final Notes](#final-notes)
 
 ## About the VTK toolkit
 The VTK file format is widely used to describe all types of scientific datasets.
@@ -96,6 +103,9 @@ python main_dataformat.py --tar_path ${TAR} --output_path ${PERSONALSPACE} --out
 
 ```
 
------
-
+## Final Notes
+- The scripts are tested on Snellius; Make sure to have enough memory to process the VTK data.
+- The scripts can be easily modified to support and process 3D Lattice data.
+- Further documentation on how to process VTK format with Python: [Kitware Docs](https://www.kitware.com/easy-data-conversion-to-vtk-with-python/)
+_ For any questions, you can reach out to monica.rotulo@surf.nl.
 

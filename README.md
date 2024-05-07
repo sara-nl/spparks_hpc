@@ -52,8 +52,8 @@ Page and official documentation: https://spparks.github.io/
    
    Finally, Get the scripts from this repo.
    ```
-   git clone https://github.com/sara-nl/SPPARKS_Snellius.git
-   cd SPPARKS_Snellius
+   git clone git@github.com:sara-nl/spparks_hpc.git
+   cd spparks_hpc
    ```
 
 ## Generate your Configuration File
@@ -84,6 +84,7 @@ The script will:
 Important: remember to copy inside the working folder your own SPPARKS input scripts. Input scripts are named `in.*` and to see how are structured and what commands they contain see [SPPARKS Commands](https://spparks.github.io/doc/Section_commands.html).
 
 ## Final Notes
+- The scripts are tested on Snellius; Make sure to have enough memory space to generate the data listed in the config file.
 - For more information about getting access to Snellius, refer to the [Access to compute services page](https://www.surf.nl/en/access-to-compute-services). 
 - For more detailed information about SPPARKS parameters and options, refer to the [Official SPPARKS Documentation](https://spparks.github.io/doc/app_am_ellipsoid.html).
 - For information about SPPARKS input scripts, refer to [SPPARKS Commands](https://spparks.github.io/doc/Section_commands.html).
