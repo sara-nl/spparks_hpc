@@ -11,7 +11,8 @@ We assume that the VTK files are stored within a compressed TAR file `.tar.gz`.
 2. [Data Description](#data-description)
 3. [Usage of the Python scripts](#usage-of-the-python-scripts)
 4. [Slurm Job Submission Example](#slurm-job-submission-example)
-5. [Final Notes](#final-notes)
+5. [How to read h5 data](#how-to-read-h5-data)
+6. [Final Notes](#final-notes)
 
 ## About the VTK toolkit
 The VTK file format is widely used to describe all types of scientific datasets.
@@ -56,7 +57,7 @@ In this structure:
 ## Usage of the Python scripts
 The Python scripts in this folder assume the experiments `vHpdV_i` are stored within a compressed TAR file (`.tar.gz`).
 
-The script `main_dataformat.py` parses this structure, extracts the VTK data, and organizes it into HDF5 datasets for further analysis or machine learning applications.
+The script `main_dataformat.py` parses this structure, extracts the VTK data, and saves it into HDF5 datasets for further analysis or machine learning applications.
 ### Requirements
 Prepare the environment:
 ```
@@ -102,6 +103,11 @@ TAR="${PERSONALSPACE}/exp_${EXPERIMENT_NUM}.tar.gz"
 python main_dataformat.py --tar_path ${TAR} --output_path ${PERSONALSPACE} --output_name "exp_${EXPERIMENT_NUM}"
 
 ```
+
+## How to read h5 data
+The Jupyter Notebook `h5_reader_nb.ipynb` (or the script `h5_reader.py`) provides functions to read and visualize the image data sequences stored within the HDF5 files. 
+
+The primary focus is on extracting these data sequences, which are stored as numpy arrays, and then either visualizing them as 2D images or converting them back into 2D slices in VTI format for further analysis and visualization in compatible tools like ParaView.
 
 ## Final Notes
 - The scripts are tested on Snellius; Make sure to have enough memory to process the VTK data.
