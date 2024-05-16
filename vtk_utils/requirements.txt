@@ -2,3 +2,4 @@ vtk
 hdf5
 pyvista
 numpy
+os
