@@ -168,9 +168,13 @@ def main(args):
     output_path = args.output_path
     output_name = args.output_name
 
-    # n = count_folders_in_tar(tar_path)
-
     print("processing tar file: ", tar_path)
+
+    # Run this line if you want to get information about the folder saved in the tar: 
+    # The function:
+    # - Returns the number of folders saved in the tar
+    # - Write the name of the folder (case name) in a metadata file
+    # n = count_folders_in_tar(tar_path, output_path, config_file = f"metadata_{output_name}")
     # print("number of samples in tar is: ", n)
 
     # Extract the samples from tar
@@ -186,9 +190,9 @@ if __name__ == "__main__":
     parser.add_argument(
         "--tar_path",
         type=str,
-        default="./experiment_1/smallest.tar.gz",
+        default="/home/monicar/prjsp/exp_1.tar.gz",
     )
-    parser.add_argument("--output_path", type=str, default="./experiment_1")
+    parser.add_argument("--output_path", type=str, default="/home/monicar/prjsp/configs_tar")
     parser.add_argument("--output_name", type=str, default="exp_1")
     args = parser.parse_args()
     main(args)
