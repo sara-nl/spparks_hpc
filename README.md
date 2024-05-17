@@ -88,6 +88,7 @@ Important: remember to copy inside the working folder your own SPPARKS input scr
 - For more information about getting access to Snellius, refer to the [Access to compute services page](https://www.surf.nl/en/access-to-compute-services). 
 - For more detailed information about SPPARKS parameters and options, refer to the [Official SPPARKS Documentation](https://spparks.github.io/doc/app_am_ellipsoid.html).
 - For information about SPPARKS input scripts, refer to [SPPARKS Commands](https://spparks.github.io/doc/Section_commands.html).
+- Parts of the created data (2D slices) have been uploaded to [this Zenodo repository](https://doi.org/10.5281/zenodo.11209659).
 
 This project is a joint effort between SURF and [ESA (TEC Directorate)](https://technology.esa.int/) as part of the digitalization program on advanced manufacturing for space applications.
 If you have any question about the code or methods used in this repository you can reach out to monica.rotulo@surf.nl and michael.mallon@esa.int.
