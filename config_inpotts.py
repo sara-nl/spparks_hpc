@@ -198,7 +198,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--working_dir",
         type=str,
-        default=f"{home_dir}/spparks",
+        default=f"{home_dir}/spparks_hpc",
         help="define working dir",
     )
     parser.add_argument(

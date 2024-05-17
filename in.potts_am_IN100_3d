@@ -1,0 +1,129 @@
+#
+# T: simulation temperature
+variable T equal 0.25
+#
+# Q: number of spins
+variable Q equal 199
+#
+# DT: number of KMC steps
+variable DT equal 0.0
+#
+# V: scan speed
+variable V_x equal 10.0
+variable V_y equal 10.0
+#
+# HATCH: hatch spacing
+variable HATCH_x equal 25.0
+variable HATCH_y equal 25.0
+#
+# OUT_DT: time interval controlling output frequency
+variable OUT_DT equal 1.0
+#
+# OUT: output filename
+#variable OUT universe am_demo.st
+#
+# case name
+variable case_name universe dhTvV_x_25_025_10_100
+#
+# SEED: random integer
+variable SEED equal 567890
+#
+# ATOI: melt pool description
+variable ATOI_1 equal 30
+variable ATOI_2 equal 70
+variable ATOI_3 equal 30
+variable ATOI_4 equal 7
+variable ATOI_5 equal 50
+variable ATOI_6 equal 90
+variable ATOI_7 equal 45
+variable ATOI_8 equal 12
+variable ATOI_9 equal 0.1
+		 
+#
+seed		${SEED}
+app_style 	am/ellipsoid	${Q} ${ATOI_1} ${ATOI_2} ${ATOI_3} ${ATOI_4}	${ATOI_5} ${ATOI_6} ${ATOI_7} ${ATOI_8} ${ATOI_9}
+
+# |————————————————————————————————————————
+# | nspins		= atoi(arg[1])
+# |————————————————————————————————————————
+# | nspins = Q(arg[1]); #Number of spins
+# | spot_width = atoi(arg[1]); #Width of the melt pool
+# | melt_tail_length = atoi(arg[2]); #Length of tail from meltpool midpoint
+# | melt_depth = atoi(arg[3]); #How many lattice sites deep the melt pool is
+# | cap_height = atoi(arg[4]); #Height of the cap leading the meltpool
+# |————————————————————————————————————————
+# | HAZ = atoi(arg[5]); # HAZ surrounding melt pool (must be larger than spot_width and melt_depth)
+# | tail_HAZ = atoi(arg[6]); #Length of HAZ trailing meltpool (must be larger than melt_tail_length)
+# | depth_HAZ = atoi(arg[7]); // HAZ depth below meltpool (must be larger than melt_depth)
+# | cap_HAZ = atoi(arg[8]); # HAZ infront of melt pool (must be larger than cap_height)
+# | exp_factor = atof(arg[9]); #Exponential parameter for mobility decay in HAZ 
+# |           M(d) = exp(-exp_factor * d)
+# |————————————————————————————————————————
+# Define simulation domain and initialize site variables
+#———————————————————————————————————————————
+dimension	 3
+lattice	 	 sc/26n 1.0
+region		 box block 0 100 0 100 0 50
+
+boundary 	 n n n
+
+create_box	 box
+create_sites	 box
+
+# Initialize layers previously simulated
+set          site stitch ./${case_name}/IN100_3d.init last
+
+# Initialize sites on this new layer with random values
+set i1 range 1 ${Q} if z >= 25
+#set i1 range 1 ${Q} if z >= 25 if x >= 10 if x <= 90 if y >= 10 if y <= 90
+#set i1 range 1 10 if z >= 25 if x < 10 
+#set i1 range 1 10 if z >= 25 if x > 90 
+#set i1 range 1 10 if z >= 25 if y < 10 
+#set i1 range 1 10 if z >= 25 if y > 90 
+
+# Initialize model double value
+set d1 value 0.0
+
+#———————————————————————————————————————————
+# Define an additive scan pattern on rectangular domain 
+# using am pass and cartesian layer commands.   
+#———————————————————————————————————————————
+
+am pass 1 dir X speed ${V_x} hatch ${HATCH_x}
+am pass 2 dir Y speed ${V_y} hatch ${HATCH_y}
+
+am cartesian_layer 1 start LL pass_id 1 thickness 25 offset -80.0 0.0
+#am cartesian_layer 2 start UL pass_id 2 thickness 25 offset 0.0 80.0
+#am cartesian_layer 3 start UR pass_id 1 thickness 25 offset 80.0 0.0
+#am cartesian_layer 4 start LR pass_id 2 thickness 25 offset 0.0 -80.0
+
+#———————————————————————————————————————————
+# Setup the solver type and parameters. Must use a "sweep" style solver
+#——————————————————————————————————————————— 
+
+sector		 yes
+sweep		 random mask no
+temperature	 ${T}
+
+#———————————————————————————————————————————
+#Specify output commands and styles.
+#——————————————————————————————————————————— 
+
+#diag_style   energy	stats yes
+diag_style   cluster	stats yes
+#diag_style   array	stats yes
+#diag_style   diffusion	stats yes
+#diag_style   propensity	stats yes
+stats        1.0
+
+# dump in vti format for post processing  ————————————
+dump dumpIN100 vtk ${OUT_DT} ./${case_name}/IN1003d.vti.* site
+dump_modify dumpIN100 sort id vtk 100 100 50 1 ${Q}
+
+# dump in stitch format for restart cases ————————————
+dump         dump.id.1 stitch ${OUT_DT} ./${case_name}/IN100_3d.am site
+
+# Simulation starts on "last" timestep instead of 0
+reset_time   stitch ./${case_name}/IN100_3d.am last
+
+run 1.0 upto

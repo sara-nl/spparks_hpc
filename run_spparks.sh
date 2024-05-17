@@ -12,8 +12,8 @@ module load 2022 Python/3.10.4-GCCcore-11.3.0
 module load spparks/16Jan23-foss-2022a
 
 ### Define directory containing the config files 
-SPPARKS="${HOME}/spparks/2024-04-17_16-42-57_5965225" # Put your own folder containing the config files
-OUTPUT="${SPPARKS}"
+SPPARKS="${HOME}/spparks_hpc"
+OUTPUT="${HOME}/spparks_hpc/2024-04-17_16-42-57_5965225" # Put your own folder containing the config files
 PERSONALSPACE= "/setup/your/personal"
 
 ### Define working directory: should be scratch memory
@@ -23,6 +23,7 @@ mkdir -p "${WORKDIR}"
 ### Copy relevant files to scratch - make sure to have all required files!
 cp "${SPPARKS}/IN100_3d.init" "${WORKDIR}"
 cp "${SPPARKS}/in.potts_am_IN100_3d" "${WORKDIR}"
+
 cp "${OUTPUT}/config_file_${SLURM_ARRAY_TASK_ID}" "${WORKDIR}"
 cp "${OUTPUT}/config_inpotts.py" "${WORKDIR}"
 
