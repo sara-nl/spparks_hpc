@@ -12,10 +12,12 @@ import tempfile
 import vtk
 
 
-def count_folders_in_tar(tar_path: str, output_dir: str, config_file: str = "metadata") -> int:
+def count_folders_in_tar(
+    tar_path: str, output_dir: str, config_file: str = "metadata"
+) -> int:
     """
     Counts number of folders (experiments) in the compressed tar file and saves their names to a config file.
-    
+
     Parameters:
     - tar_path (str): Path to the tar file.
     - output_dir (str): Directory where the config file will be saved.
@@ -34,15 +36,15 @@ def count_folders_in_tar(tar_path: str, output_dir: str, config_file: str = "met
         with tarfile.open(tar_path, "r:gz") as tar:
             for member in iter(lambda: tar.next(), None):
                 if member.isdir():
-                    parts = member.name.split('/')
+                    parts = member.name.split("/")
                     case_name = parts[-1] if parts else member.name
                     directory_names.append(case_name)
                     n += 1
 
         # Save the directory names to a config file
-        with open(config_path, 'w') as file:
+        with open(config_path, "w") as file:
             for name in directory_names:
-                file.write(name + '\t\n')
+                file.write(name + "\t\n")
 
     except EOFError:
         print("Warning: Reached corrupted section in tar file")

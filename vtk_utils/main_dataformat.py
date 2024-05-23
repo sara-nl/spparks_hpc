@@ -64,7 +64,9 @@ def extract_vtk_folders_from_tar(
 
         # Process the last sequence after exiting the loop
         if temporal_sequence:
-            temporal_sequence, all_sample = process_directory(temporal_sequence, all_sample)
+            temporal_sequence, all_sample = process_directory(
+                temporal_sequence, all_sample
+            )
 
     except EOFError:
         print("Warning: Reached corrupted section in tar file")
@@ -112,6 +114,7 @@ def generate_datasets_from_sample_list(
             file_paths.append(datapath_3D)
 
     return file_paths
+
 
 def generate_datasets(
     data_list: List[vtk.vtkImageData],
@@ -162,7 +165,6 @@ def generate_datasets(
     return datapath_2D, datapath_3D
 
 
-
 def main(args):
     tar_path = args.tar_path
     output_path = args.output_path
@@ -170,7 +172,7 @@ def main(args):
 
     print("processing tar file: ", tar_path)
 
-    # Run this line if you want to get information about the folder saved in the tar: 
+    # Run this line if you want to get information about the folder saved in the tar:
     # The function:
     # - Returns the number of folders saved in the tar
     # - Write the name of the folder (case name) in a metadata file
@@ -181,7 +183,9 @@ def main(args):
     sample_list = extract_vtk_folders_from_tar(tar_path)
 
     # generate 2D / 3D datasets
-    dataset_2D = generate_datasets_from_sample_list(sample_list, output_path, output_name, slicing=True)
+    dataset_2D = generate_datasets_from_sample_list(
+        sample_list, output_path, output_name, slicing=True
+    )
     print("2D dataset saved in: ", dataset_2D)
 
 
@@ -192,7 +196,9 @@ if __name__ == "__main__":
         type=str,
         default="/home/monicar/prjsp/exp_1.tar.gz",
     )
-    parser.add_argument("--output_path", type=str, default="/home/monicar/prjsp/configs_tar")
+    parser.add_argument(
+        "--output_path", type=str, default="/home/monicar/prjsp/configs_tar"
+    )
     parser.add_argument("--output_name", type=str, default="exp_1")
     args = parser.parse_args()
     main(args)

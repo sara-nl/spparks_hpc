@@ -20,7 +20,6 @@ def load_from_yaml(filename: str) -> Dict[str, Any]:
 
 
 class Potts_Param:
-
     def __init__(self, filename: str):
         """
         The Potts_Param object prepare all necessary simulation parameters

@@ -44,7 +44,6 @@ def create_folder(working_dir, config_name):
 
 
 def copy_initial_condition(working_dir, directory, init_file="IN100_3d.init"):
-
     # Construct full paths to the source and destination files
     src = os.path.join(working_dir, init_file)
     dst = os.path.join(directory, init_file)

@@ -44,7 +44,9 @@ def _check_array_dimensions(numpy_array: np.ndarray, extent_size: tuple):
     return True
 
 
-def render_vtk_image_data(vtk_data_object: vtk.vtkImageData, filename: str = "visualization.png"):
+def render_vtk_image_data(
+    vtk_data_object: vtk.vtkImageData, filename: str = "visualization.png"
+):
     """
     Visualize a vtkImageData object. Automatically handles both 2D and 3D data.
 
@@ -129,7 +131,9 @@ def render_3D_from_numpy(numpy_array: np.ndarray, filename: str = "visual_np.png
     plotter.close()
 
 
-def numpy_to_vtk_file(data_array: np.ndarray, filename: str, spacing=SPACING, origin=ORIGIN) -> None:
+def numpy_to_vtk_file(
+    data_array: np.ndarray, filename: str, spacing=SPACING, origin=ORIGIN
+) -> None:
     """
     Convert a 2D or 3D NumPy array to a vtkImageData object and write it to a file.
 
@@ -152,7 +156,7 @@ def numpy_to_vtk_file(data_array: np.ndarray, filename: str, spacing=SPACING, or
 
     # Create a vtkImageData object
     image_data = vtk.vtkImageData()
-    image_data.SetDimensions(new_dims) 
+    image_data.SetDimensions(new_dims)
     image_data.SetSpacing(spacing)
     image_data.SetOrigin(origin)
     image_data.AllocateScalars(vtk.VTK_INT, 1)
@@ -174,4 +178,3 @@ def numpy_to_vtk_file(data_array: np.ndarray, filename: str, spacing=SPACING, or
     writer.SetCompressor(None)
 
     writer.Write()
-

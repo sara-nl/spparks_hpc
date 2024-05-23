@@ -1,7 +1,7 @@
-'''
+"""
 Script for reading the vti data from h5 data format
 Last modified: 14 May 2024
-'''
+"""
 import os
 import re
 from typing import List, Tuple
@@ -22,9 +22,11 @@ class H5_Handler:
 
     def extract_length(self, filename):
         # Use a regular expression to find 'len' followed by an underscore and one or more digits
-        match = re.search(r'len_(\d+)', self.file_path)
+        match = re.search(r"len_(\d+)", self.file_path)
         if match:
-            return int(match.group(1))  # Convert the matched string (digits only) to an integer
+            return int(
+                match.group(1)
+            )  # Convert the matched string (digits only) to an integer
         else:
             return None  # Return None if no match is found
 
@@ -41,7 +43,6 @@ class H5_Handler:
         with h5py.File(self.file_path, "r") as file:
             images = file["images"][start_idx:end_idx]
         return images
-
 
     def get_total_frames(self):
         """
@@ -61,12 +62,13 @@ class H5_Handler:
         """
         with h5py.File(self.file_path, "r") as file:
             num_frames = len(file["images"])
-        
+
         return num_frames // self.experiments_length
 
 
-
-def visualize_all_sequence_from_numpy(sequence: List[np.ndarray], filename: str = "instance") -> None:
+def visualize_all_sequence_from_numpy(
+    sequence: List[np.ndarray], filename: str = "instance"
+) -> None:
     """
     Processes a sequence of frames, rendering each as an image.
 
@@ -75,7 +77,7 @@ def visualize_all_sequence_from_numpy(sequence: List[np.ndarray], filename: str 
     """
     for i, frame in enumerate(sequence):
         if isinstance(frame, np.ndarray):
-            render_2D_from_numpy(frame, filename=f'{filename}_{i}.png')
+            render_2D_from_numpy(frame, filename=f"{filename}_{i}.png")
         else:
             print(f"Skipping index {i}: not a numpy array")
 
@@ -86,15 +88,14 @@ def main(args):
 
     data_handler = H5_Handler(os.path.join(data_path, experiment))
 
-
-    video_idx = 0 # For example, load frames from video 2 (index 1)
+    video_idx = 0  # For example, load frames from video 2 (index 1)
     sequence_0 = data_handler.load_experiment(video_idx)
 
-    # now you can visualize it or 
-    visualize_all_sequence_from_numpy(sequence_0, 'image')
+    # now you can visualize it or
+    visualize_all_sequence_from_numpy(sequence_0, "image")
 
     for i, frame in enumerate(sequence_0):
-        numpy_to_vtk_file(frame, f'process_2d.vti.{i}')
+        numpy_to_vtk_file(frame, f"process_2d.vti.{i}")
 
 
 if __name__ == "__main__":
@@ -108,4 +109,3 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     main(args)
-
