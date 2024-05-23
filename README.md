@@ -92,7 +92,7 @@ Important: remember to copy inside the working folder your own SPPARKS input scr
 
 This project is a collaborative effort between SURF and the [ESA (TEC Directorate)](https://technology.esa.int/), as part of the digitalization program focused on advanced manufacturing for space applications.
 
-It has been made possible with the support of the EuroCC project implementation in the Netherlands (NCC
+It has been made possible with the support of the [EuroCC](https://www.eurocc-access.eu/) project implementation in the Netherlands (NCC
 Netherlands), funded by the European High-Performance Computing Joint Undertaking (Grant Agreement 101101903).
 
 If you have any question about the code or methods used in this repository you can reach out to monica.rotulo@surf.nl and michael.mallon@esa.int.
