@@ -9,6 +9,7 @@ This repository contains scripts and configurations for running and generating d
 3. [Generate your Configuration File](#generate-your-configuration-file)
 4. [Execute SPPARKS](#execute-spparks)
 5. [Final Notes](#final-notes)
+6. [Acknowledgement](#acknowledgement)
 
 ## About SPPARKS 
 SPPARKS is a parallel Monte Carlo code for on-lattice and off-lattice models that includes algorithms for kinetic Monte Carlo (KMC), rejection kinetic Monte Carlo (rKMC), and Metropolis Monte Carlo (MMC). 
@@ -88,14 +89,19 @@ Important: remember to copy inside the working folder your own SPPARKS input scr
 - For more information about getting access to Snellius, refer to the [Access to compute services page](https://www.surf.nl/en/access-to-compute-services). 
 - For more detailed information about SPPARKS parameters and options, refer to the [Official SPPARKS Documentation](https://spparks.github.io/doc/app_am_ellipsoid.html).
 - For information about SPPARKS input scripts, refer to [SPPARKS Commands](https://spparks.github.io/doc/Section_commands.html).
-- Parts of the created data (2D slices) have been uploaded to [this Zenodo repository](https://doi.org/10.5281/zenodo.11209659).
+- Parts of the created data (2D slices) have been uploaded to [this](https://doi.org/10.5281/zenodo.11209659) Zenodo repository.
 
-This project is a collaborative effort between SURF and the [ESA (TEC Directorate)](https://technology.esa.int/), as part of the digitalization program focused on advanced manufacturing for space applications.
+## Acknowledgement
+This project is a collaborative effort between SURF and ESA (TEC Directorate), as part of the digitalization program focused on advanced manufacturing for space applications.
 
 It has been made possible with the support of the [EuroCC](https://www.eurocc-access.eu/) project implementation in the Netherlands (NCC
 Netherlands), funded by the European High-Performance Computing Joint Undertaking (Grant Agreement 101101903).
 
 If you have any question about the code or methods used in this repository you can reach out to monica.rotulo@surf.nl and michael.mallon@esa.int.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
 
 
 
